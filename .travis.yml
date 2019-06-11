@@ -2,5 +2,5 @@ os: osx
 osx_image: xcode10.2
 language: swift
 xcode_project: Breathe.xcodeproj
-xcode_scheme: BreatheTests
+xcode_scheme: Breathe
 xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone X
