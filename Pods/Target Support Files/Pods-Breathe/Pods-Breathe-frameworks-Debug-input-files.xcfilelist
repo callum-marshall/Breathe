@@ -1,0 +1,5 @@
+${PODS_ROOT}/Target Support Files/Pods-Breathe/Pods-Breathe-frameworks.sh
+${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework
+${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM
+${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/70E1902C-569B-3192-A297-3622F9745C20.bcsymbolmap
+${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/CD548FF3-ECB4-31D0-8E4F-AE55F70E287F.bcsymbolmap
