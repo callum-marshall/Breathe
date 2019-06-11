@@ -5,7 +5,7 @@ This is the final team engineering project at Makers. We decided to create an iO
 
 ## Architecture/Domain Model
 
-![alt text](https://github.com/callum-marshall/Breathe/blob/master/MVC-Architecture.png)
+![alt text](https://github.com/callum-marshall/Breathe/blob/mvc/MVC-Architecture.png)
 
 
 ## Screenshots
