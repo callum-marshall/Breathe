@@ -7,7 +7,7 @@ This is the final team engineering project at Makers. We decided to create an iO
 - [Yadira Sanchez](https://github.com/yadlra)
 - [Kiah Hewitt](https://github.com/kiahjade)
 - [Xain Storey](https://github.com/Xa1n)
-- [Callum Marshall(https://github.com/callum-marshall)
+- [Callum Marshall](https://github.com/callum-marshall)
 
 
 ## Architecture/Domain Model
