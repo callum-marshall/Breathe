@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3CA0216E1C536B4FAE9404FC /* libPods-Breathe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA7E534DC649D4A10240558 /* libPods-Breathe.a */; };
 		3FAB8A8A22AE850E00E053E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB8A8922AE850E00E053E7 /* AppDelegate.swift */; };
 		3FAB8A8C22AE850E00E053E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB8A8B22AE850E00E053E7 /* ViewController.swift */; };
 		3FAB8A8F22AE850E00E053E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FAB8A8D22AE850E00E053E7 /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0CA7E534DC649D4A10240558 /* libPods-Breathe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Breathe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FAB8A8622AE850E00E053E7 /* Breathe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breathe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FAB8A8922AE850E00E053E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FAB8A8B22AE850E00E053E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -51,6 +53,8 @@
 		3FAB8AAC22AE851000E053E7 /* BreatheUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreatheUITests.swift; sourceTree = "<group>"; };
 		3FAB8AAE22AE851000E053E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FAB8ABB22AE892300E053E7 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		3FCB28A8E4606BC81A6E52DA /* Pods-Breathe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breathe.release.xcconfig"; path = "Target Support Files/Pods-Breathe/Pods-Breathe.release.xcconfig"; sourceTree = "<group>"; };
+		D52B3FE79B1B63CB7C6120E1 /* Pods-Breathe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Breathe.debug.xcconfig"; path = "Target Support Files/Pods-Breathe/Pods-Breathe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FAB8ABC22AE892300E053E7 /* MapKit.framework in Frameworks */,
+				3CA0216E1C536B4FAE9404FC /* libPods-Breathe.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -87,6 +92,7 @@
 				3FAB8AAB22AE851000E053E7 /* BreatheUITests */,
 				3FAB8A8722AE850E00E053E7 /* Products */,
 				3FAB8ABA22AE892300E053E7 /* Frameworks */,
+				9B13CFB0760D4C462242C17D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -136,8 +142,19 @@
 			isa = PBXGroup;
 			children = (
 				3FAB8ABB22AE892300E053E7 /* MapKit.framework */,
+				0CA7E534DC649D4A10240558 /* libPods-Breathe.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9B13CFB0760D4C462242C17D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D52B3FE79B1B63CB7C6120E1 /* Pods-Breathe.debug.xcconfig */,
+				3FCB28A8E4606BC81A6E52DA /* Pods-Breathe.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -147,9 +164,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3FAB8AB122AE851000E053E7 /* Build configuration list for PBXNativeTarget "Breathe" */;
 			buildPhases = (
+				0D55DA504323D9817DB22B9C /* [CP] Check Pods Manifest.lock */,
 				3FAB8A8222AE850E00E053E7 /* Sources */,
 				3FAB8A8322AE850E00E053E7 /* Frameworks */,
 				3FAB8A8422AE850E00E053E7 /* Resources */,
+				EE5CA6AA251347A1FA172494 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -270,6 +289,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0D55DA504323D9817DB22B9C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Breathe-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE5CA6AA251347A1FA172494 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Breathe/Pods-Breathe-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Breathe/Pods-Breathe-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Breathe/Pods-Breathe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3FAB8A8222AE850E00E053E7 /* Sources */ = {
@@ -451,6 +512,7 @@
 		};
 		3FAB8AB222AE851000E053E7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D52B3FE79B1B63CB7C6120E1 /* Pods-Breathe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -469,6 +531,7 @@
 		};
 		3FAB8AB322AE851000E053E7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3FCB28A8E4606BC81A6E52DA /* Pods-Breathe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
