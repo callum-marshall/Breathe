@@ -1,6 +1,10 @@
 os: osx
 osx_image: xcode10.2
 language: swift
+# steps:
+#   - run:
+#      name: pre-start simulator
+#      command: xcrun instruments -w "iPhone 7"
 xcode_project: Breathe.xcodeproj
 xcode_scheme: Breathe
 xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone X
