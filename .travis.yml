@@ -1,5 +1,6 @@
 os: osx
 osx_image: xcode10.2
 language: swift
-script:
-  - xcodebuild clean build test -project Breathe.xcodeproj -scheme Breathe -destination "platform=iOS Simulator,name=iPhone 8,OS=11.2" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
+xcode_project: Breathe.xcodeproj
+xcode_scheme: BreatheTests
+xcode_destination: platform=iOS Simulator,OS=11.3,name=iPhone X
