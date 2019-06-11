@@ -3,7 +3,10 @@
 This is the final team engineering project at Makers. We decided to create an iOS app that features an interactive map of various cities around the world that a user can navigate to and view a set of pollution data about the subareas within them. Our goal for this is to build an accessible app that helps an everyday user understand the environmental conditions of the area they're travelling through.
 
 
-## Domain Model
+## Architecture/Domain Model
+
+![alt text](https://github.com/callum-marshall/Breathe/blob/master/MVC-Architecture.png)
+
 
 ## Screenshots
 
