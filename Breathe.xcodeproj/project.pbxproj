@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3FA5996E22B155450099B43B /*  NetworkingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5996D22B155450099B43B /*  NetworkingClient.swift */; };
+		3FA5996E22B155450099B43B /* NetworkingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5996D22B155450099B43B /* NetworkingClient.swift */; };
 		3FAB8A8A22AE850E00E053E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB8A8922AE850E00E053E7 /* AppDelegate.swift */; };
 		3FAB8A8C22AE850E00E053E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB8A8B22AE850E00E053E7 /* ViewController.swift */; };
 		3FAB8A8F22AE850E00E053E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FAB8A8D22AE850E00E053E7 /* Main.storyboard */; };
@@ -39,7 +39,7 @@
 
 /* Begin PBXFileReference section */
 		325BE28A1CD460567897ECEF /* Pods_Breathe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Breathe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3FA5996D22B155450099B43B /*  NetworkingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " NetworkingClient.swift"; sourceTree = "<group>"; };
+		3FA5996D22B155450099B43B /* NetworkingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingClient.swift; sourceTree = "<group>"; };
 		3FAB8A8622AE850E00E053E7 /* Breathe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breathe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FAB8A8922AE850E00E053E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FAB8A8B22AE850E00E053E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -118,7 +118,7 @@
 				3FAB8A9522AE851000E053E7 /* LaunchScreen.storyboard */,
 				3FAB8A9822AE851000E053E7 /* Info.plist */,
 				3FAB8A9022AE850E00E053E7 /* Breathe.xcdatamodeld */,
-				3FA5996D22B155450099B43B /*  NetworkingClient.swift */,
+				3FA5996D22B155450099B43B /* NetworkingClient.swift */,
 			);
 			path = Breathe;
 			sourceTree = "<group>";
@@ -340,7 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FAB8A8C22AE850E00E053E7 /* ViewController.swift in Sources */,
-				3FA5996E22B155450099B43B /*  NetworkingClient.swift in Sources */,
+				3FA5996E22B155450099B43B /* NetworkingClient.swift in Sources */,
 				3FAB8A9222AE850E00E053E7 /* Breathe.xcdatamodeld in Sources */,
 				3FAB8A8A22AE850E00E053E7 /* AppDelegate.swift in Sources */,
 			);
