@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3CA0216E1C536B4FAE9404FC /* libPods-Breathe.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CA7E534DC649D4A10240558 /* libPods-Breathe.a */; };
+		3FA5996E22B155450099B43B /*  NetworkingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5996D22B155450099B43B /*  NetworkingClient.swift */; };
 		3FAB8A8A22AE850E00E053E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB8A8922AE850E00E053E7 /* AppDelegate.swift */; };
 		3FAB8A8C22AE850E00E053E7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB8A8B22AE850E00E053E7 /* ViewController.swift */; };
 		3FAB8A8F22AE850E00E053E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FAB8A8D22AE850E00E053E7 /* Main.storyboard */; };
@@ -17,6 +17,7 @@
 		3FAB8AA222AE851000E053E7 /* BreatheTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB8AA122AE851000E053E7 /* BreatheTests.swift */; };
 		3FAB8AAD22AE851000E053E7 /* BreatheUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB8AAC22AE851000E053E7 /* BreatheUITests.swift */; };
 		3FAB8ABC22AE892300E053E7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FAB8ABB22AE892300E053E7 /* MapKit.framework */; };
+		DAE701B019DD070FCEF6C0A1 /* Pods_Breathe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 325BE28A1CD460567897ECEF /* Pods_Breathe.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +38,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0CA7E534DC649D4A10240558 /* libPods-Breathe.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Breathe.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		325BE28A1CD460567897ECEF /* Pods_Breathe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Breathe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FA5996D22B155450099B43B /*  NetworkingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " NetworkingClient.swift"; sourceTree = "<group>"; };
 		3FAB8A8622AE850E00E053E7 /* Breathe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breathe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FAB8A8922AE850E00E053E7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FAB8A8B22AE850E00E053E7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,7 +65,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FAB8ABC22AE892300E053E7 /* MapKit.framework in Frameworks */,
-				3CA0216E1C536B4FAE9404FC /* libPods-Breathe.a in Frameworks */,
+				DAE701B019DD070FCEF6C0A1 /* Pods_Breathe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -116,6 +118,7 @@
 				3FAB8A9522AE851000E053E7 /* LaunchScreen.storyboard */,
 				3FAB8A9822AE851000E053E7 /* Info.plist */,
 				3FAB8A9022AE850E00E053E7 /* Breathe.xcdatamodeld */,
+				3FA5996D22B155450099B43B /*  NetworkingClient.swift */,
 			);
 			path = Breathe;
 			sourceTree = "<group>";
@@ -142,7 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				3FAB8ABB22AE892300E053E7 /* MapKit.framework */,
-				0CA7E534DC649D4A10240558 /* libPods-Breathe.a */,
+				325BE28A1CD460567897ECEF /* Pods_Breathe.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -337,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3FAB8A8C22AE850E00E053E7 /* ViewController.swift in Sources */,
+				3FA5996E22B155450099B43B /*  NetworkingClient.swift in Sources */,
 				3FAB8A9222AE850E00E053E7 /* Breathe.xcdatamodeld in Sources */,
 				3FAB8A8A22AE850E00E053E7 /* AppDelegate.swift in Sources */,
 			);
