@@ -8,62 +8,54 @@
 
 import UIKit
 import Mapbox
+import SwiftyJSON
+import Alamofire
 
 class ViewController: UIViewController, MGLMapViewDelegate {
-
-    @IBOutlet weak var textView: UITextView!
     
-    private let networkingClient = NetworkingClient()
-    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        // Do any additional setup after loading the view.
-//
-//        let mapView = MGLMapView(frame: view.bounds)
-//        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//        mapView.delegate = self
-//
-//        mapView.styleURL = MGLStyle.streetsStyleURL
-//
-//        // coordinates for London, UK
-//        let center = CLLocationCoordinate2D(latitude: 51.509865, longitude: -0.118092)
-//
-//        // set starting point
-//        mapView.setCenter(center, zoomLevel: 6, direction: 0, animated: false)
-//
-//        view.addSubview(mapView)
-//        view.addSubview(textView)
-//    }
-//
-//    func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
-//        // Wait for the map to load before initiating first camera movement
-//
-//        // Create a camera that rotates around center point
-//
-//        let camera = MGLMapCamera(lookingAtCenter: mapView.centerCoordinate, altitude: 100000,
-//                                  pitch: 3, heading: 0)
-//
-//        // Animate the camera movement over 5 seconds
-//        mapView.setCamera(camera, withDuration: 3, animationTimingFunction:
-//            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
-//    }
-    
-    
-    @IBAction func executeRequest(_ sender: Any) {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
         
-        guard let urlToExecute = URL(string: "https://api.breezometer.com/air-quality/v2/current-conditions?lat=51.507&lon=-0.127&key=ec040091a9074848a64d4aafb34e62ed&features=breezometer_aqi,local_aqi,sources_and_effects") else {
-            return
-        }
-        
-        networkingClient.execute(urlToExecute) { (json, error) in
-            if let error = error {
-                self.textView.text = error.localizedDescription
-            } else if let json = json {
-                self.textView.text = json.description
+        Alamofire.request("http://api.erg.kcl.ac.uk/AirQuality/Data/Nowcast/lat=51.5191/lon=0.0739/Json").responseJSON { (responseData) -> Void in
+            if((responseData.result.value) != nil) {
+                let swiftyJsonVar = JSON(responseData.result.value!)
+                print("hello warld")
+                print(swiftyJsonVar["PointResult"]["@O3"])
+                print(swiftyJsonVar["PointResult"]["@NO2"])
+                print(swiftyJsonVar["PointResult"]["@PM10"])
+                print(swiftyJsonVar["PointResult"]["@PM25"])
+                print(swiftyJsonVar["PointResult"]["@lon"])
+                print(swiftyJsonVar["PointResult"]["@lat"])
             }
         }
+
+        let mapView = MGLMapView(frame: view.bounds)
+        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        mapView.delegate = self
+
+        mapView.styleURL = MGLStyle.streetsStyleURL
+
+        // coordinates for London, UK
+        let center = CLLocationCoordinate2D(latitude: 51.509865, longitude: -0.118092)
+
+        // set starting point
+        mapView.setCenter(center, zoomLevel: 6, direction: 0, animated: false)
+
+        view.addSubview(mapView)
+    }
+
+    func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
+        // Wait for the map to load before initiating first camera movement
+
+        // Create a camera that rotates around center point
+
+        let camera = MGLMapCamera(lookingAtCenter: mapView.centerCoordinate, altitude: 100000,
+                                  pitch: 3, heading: 0)
+
+        // Animate the camera movement over 5 seconds
+        mapView.setCamera(camera, withDuration: 3, animationTimingFunction:
+            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
     }
     
-
 }
-
