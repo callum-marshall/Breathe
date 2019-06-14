@@ -51,7 +51,7 @@ class ViewController: UIViewController, MGLMapViewDelegate {
     
     @IBAction func executeRequest(_ sender: Any) {
         
-        guard let urlToExecute = URL(string: "https://jsonplaceholder.typicode.com/posts/1") else {
+        guard let urlToExecute = URL(string: "https://api.breezometer.com/air-quality/v2/current-conditions?lat=51.507&lon=-0.127&key=ec040091a9074848a64d4aafb34e62ed&features=breezometer_aqi,local_aqi,sources_and_effects") else {
             return
         }
         
