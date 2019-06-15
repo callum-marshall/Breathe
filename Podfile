@@ -4,4 +4,5 @@ use_frameworks!
 target 'Breathe' do
   pod 'Mapbox-iOS-SDK', '~> 5.0'
   pod 'Alamofire', '~> 4.5'
+  pod 'SwiftyJSON', '~> 5.0'
 end
