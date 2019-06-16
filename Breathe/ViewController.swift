@@ -8,25 +8,39 @@ class ViewController: UIViewController, MGLMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-    Alamofire.request("http://api.erg.kcl.ac.uk/AirQuality/Data/Nowcast/lat=51.517360/lon=-0.073399/Json").responseJSON { (responseData) -> Void in
-            if((responseData.result.value) != nil) {
-                let swiftyJsonVar = JSON(responseData.result.value!)
-                let jsonData = swiftyJsonVar["PointResult"]
-               
-                let aldgateData:LocationData = LocationData(
-                    name: "Aldgate",
-                    jsonData: jsonData
-                )
-                
-                print(aldgateData.name)
-                print(aldgateData.O3)
-                print(aldgateData.NO2)
-                print(aldgateData.PM10)
-                print(aldgateData.PM25)
-                print(aldgateData.lat)
-                print(aldgateData.lon)
-    
+        // Do any additional setup after loading the view
+        
+        struct borough {
+            let name: String
+            let lat: Double
+            let lon: Double
+        }
+        
+        struct boroughs {
+            let boroughs: [borough]
+        }
+        
+        let boroughData = [
+            borough(
+                name: "City of London",
+                lat: 51.5155,
+                lon: -0.0922
+            )
+        ]
+//      For every borough in the array
+        for i in 0..<boroughData.count {
+//          Make an API request
+        Alamofire.request("http://api.erg.kcl.ac.uk/AirQuality/Data/Nowcast/lat=\(boroughData[i].lat)/lon=\(boroughData[i].lon)/Json").responseJSON { (responseData) -> Void in
+                if((responseData.result.value) != nil) {
+                    let swiftyJsonVar = JSON(responseData.result.value!)
+                    let jsonData = swiftyJsonVar["PointResult"]
+//                  Wrap the response in an object
+                    let cityOfLondonData:LocationData = LocationData(
+                        name: "\(boroughData[i].name)",
+                        jsonData: jsonData
+                    )
+                    print(cityOfLondonData.name, cityOfLondonData.PM25)
+                }
             }
         }
 
