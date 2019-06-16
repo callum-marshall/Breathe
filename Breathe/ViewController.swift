@@ -7,42 +7,33 @@ import Alamofire
 class ViewController: UIViewController, MGLMapViewDelegate {
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view
-        
-        struct borough {
-            let name: String
-            let lat: Double
-            let lon: Double
-        }
-        
-        struct boroughs {
-            let boroughs: [borough]
-        }
-        
-        let boroughData = [
-            borough(
-                name: "City of London",
-                lat: 51.5155,
-                lon: -0.0922
-            )
-        ]
-//      For every borough in the array
+
+        // for each borough
         for i in 0..<boroughData.count {
-//          Make an API request
-        Alamofire.request("http://api.erg.kcl.ac.uk/AirQuality/Data/Nowcast/lat=\(boroughData[i].lat)/lon=\(boroughData[i].lon)/Json").responseJSON { (responseData) -> Void in
+            
+            // interpolate the 'lat' and 'lon' in the api URL
+            let apiURL = "http://api.erg.kcl.ac.uk/AirQuality/Data/Nowcast/lat=\(boroughData[i].lat)/lon=\(boroughData[i].lon)/Json"
+            
+            // make an API request with the api URL
+            Alamofire.request(apiURL).responseJSON { (responseData) -> Void in
+                
+                // if the value of the result isn't nil
                 if((responseData.result.value) != nil) {
-                    let swiftyJsonVar = JSON(responseData.result.value!)
-                    let jsonData = swiftyJsonVar["PointResult"]
-//                  Wrap the response in an object
-                    let cityOfLondonData:LocationData = LocationData(
-                        name: "\(boroughData[i].name)",
-                        jsonData: jsonData
-                    )
-                    print(cityOfLondonData.name, cityOfLondonData.PM25)
+                    
+                    // save the resulting data (from the key 'PointResult') to a variable
+                    let jsonData = JSON(responseData.result.value!)["PointResult"]
+                    
+                    // add the response data to the borough object using our new JSON variable
+                    boroughData[i].add(jsonData: jsonData)
+                    
+                    // print some data in the log for visibility
+                    print(boroughData[i].name, boroughData[i].PM25)
                 }
             }
         }
+        
+        super.viewDidLoad()
+        // Do any additional setup after loading the view
 
         let mapView = MGLMapView(frame: view.bounds)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
