@@ -49,21 +49,31 @@ class ViewController: UIViewController, MGLMapViewDelegate {
 
         view.addSubview(mapView)
         
-//        Coordinates
-        let coordinates = [
-            CLLocationCoordinate2D(latitude: 51.5099, longitude: -0.0059)
-        ]
         
-//        Point annotations
-        var pointAnnotations = [MGLPointAnnotation]()
-        for coordinate in coordinates {
-            let point = MGLPointAnnotation()
-            point.coordinate = coordinate
-            point.title = "\(coordinate.latitude), \(coordinate.longitude)"
-            pointAnnotations.append(point)
+    }
+    
+    func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
+        guard annotation is MGLPointAnnotation else {
+            return nil
         }
         
-        mapView.addAnnotations(pointAnnotations)
+        let reuseIdentifier = "\(annotation.coordinate.longitude)"
+        
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+        
+        if annotationView == nil {
+            annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
+            annotationView!.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
+            
+            let hue = CGFloat(annotation.coordinate.longitude) / 100
+            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
+        }
+        
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
+        return true
     }
 
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
@@ -77,6 +87,47 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         // Animate the camera movement over 5 seconds
         mapView.setCamera(camera, withDuration: 3, animationTimingFunction:
             CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
+        
+        for i in 0..<boroughData.count {
+            
+            //        Coordinates
+            let coordinates = [
+                CLLocationCoordinate2D(latitude: boroughData[i].lat, longitude: boroughData[i].lon)
+            ]
+            
+            //        Point annotations
+            var pointAnnotations = [MGLPointAnnotation]()
+            for coordinate in coordinates {
+                let point = MGLPointAnnotation()
+                point.coordinate = coordinate
+                point.title = boroughData[i].name
+                point.subtitle = "PM10: \(boroughData[i].PM10)"
+                pointAnnotations.append(point)
+            }
+            
+            mapView.addAnnotations(pointAnnotations)
+        }
     }
     
+}
+
+class CustomAnnotationView: MGLAnnotationView {
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        // Use CALayer’s corner radius to turn this view into a circle.
+        layer.cornerRadius = bounds.width / 2
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.white.cgColor
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        
+        // Animate the border width in/out, creating an iris effect.
+        let animation = CABasicAnimation(keyPath: "borderWidth")
+        animation.duration = 0.1
+        layer.borderWidth = selected ? bounds.width / 4 : 2
+        layer.add(animation, forKey: "borderWidth")
+    }
 }

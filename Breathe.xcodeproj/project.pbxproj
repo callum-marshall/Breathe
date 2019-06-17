@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		01F9CE5522B78E69004EF4C1 /* Boroughs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F9CE5422B78E69004EF4C1 /* Boroughs.swift */; };
 		3F9F435C22B51DA000CAB4A4 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9F435B22B51DA000CAB4A4 /* LocationData.swift */; };
 		3FA5996E22B155450099B43B /* NetworkingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5996D22B155450099B43B /* NetworkingClient.swift */; };
 		3FAB8A8A22AE850E00E053E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB8A8922AE850E00E053E7 /* AppDelegate.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		01F9CE5422B78E69004EF4C1 /* Boroughs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boroughs.swift; sourceTree = "<group>"; };
 		325BE28A1CD460567897ECEF /* Pods_Breathe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Breathe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F9F435B22B51DA000CAB4A4 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
 		3FA5996D22B155450099B43B /* NetworkingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingClient.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 		3FAB8A8822AE850E00E053E7 /* Breathe */ = {
 			isa = PBXGroup;
 			children = (
+				01F9CE5422B78E69004EF4C1 /* Boroughs.swift */,
 				3FAB8A8922AE850E00E053E7 /* AppDelegate.swift */,
 				3FAB8A8B22AE850E00E053E7 /* ViewController.swift */,
 				3FAB8A8D22AE850E00E053E7 /* Main.storyboard */,
@@ -342,6 +345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01F9CE5522B78E69004EF4C1 /* Boroughs.swift in Sources */,
 				3FAB8A8C22AE850E00E053E7 /* ViewController.swift in Sources */,
 				3FA5996E22B155450099B43B /* NetworkingClient.swift in Sources */,
 				3FAB8A9222AE850E00E053E7 /* Breathe.xcdatamodeld in Sources */,

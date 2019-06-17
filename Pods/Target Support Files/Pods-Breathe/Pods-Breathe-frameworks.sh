@@ -161,16 +161,20 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework"
   install_dsym "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM"
-  install_bcsymbolmap "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/70E1902C-569B-3192-A297-3622F9745C20.bcsymbolmap"
   install_bcsymbolmap "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/CD548FF3-ECB4-31D0-8E4F-AE55F70E287F.bcsymbolmap"
+  install_bcsymbolmap "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/70E1902C-569B-3192-A297-3622F9745C20.bcsymbolmap"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework"
   install_framework "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework"
   install_dsym "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM"
-  install_bcsymbolmap "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/70E1902C-569B-3192-A297-3622F9745C20.bcsymbolmap"
   install_bcsymbolmap "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/CD548FF3-ECB4-31D0-8E4F-AE55F70E287F.bcsymbolmap"
+  install_bcsymbolmap "${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/70E1902C-569B-3192-A297-3622F9745C20.bcsymbolmap"
+  install_framework "${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
