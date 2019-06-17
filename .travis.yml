@@ -1,5 +1,13 @@
 os: osx
 osx_image: xcode10.2
 language: swift
+podfile: ./Podfile
+xcode_project: Breathe.xcworkspace
+xcode_scheme: BreatheTests
+xcode_destination: platform=iOS Simulator,name=iPhone X,OS=12.2
+
 script:
-  - xcodebuild clean build test -project Breathe.xcodeproj -scheme Breathe -destination "platform=iOS Simulator,name=iPhone 8,OS=11.2" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
+  - bundle exec pod install
+  -
+  # - xcodebuild clean build test -project Breathe.xcodeproj -scheme Breathe -destination "platform=iOS Simulator,name=iPhone 8,OS=11.2" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
+ 
