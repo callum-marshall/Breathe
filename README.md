@@ -14,8 +14,30 @@ This is the final team engineering project at Makers. We decided to create an iO
 
 ![alt text](https://github.com/callum-marshall/Breathe/blob/master/MVC-Architecture.png)
 
+## How to install
+
+Clone this repository:
+```
+git clone https://github.com/callum-marshall/Breathe.git
+```
+Cd to the repo in your terminal and install the dependencies with Pod:
+```
+pod install
+```
+Once the installation is finished, open the project in Xcode (please install it if you don't have it):
+```
+open Breathe.xcworkspace
+```
+OR
+```
+xed .
+```
+To run the tests, navigate to the top left of Xcode (as seen below) and click the play button, or press 'Cmd(⌘) + U'
 
 ## Screenshots
+
+![alt text](https://github.com/callum-marshall/Breathe/blob/master/Test_Instruction.png)
+
 
 ## Tech Stack
 
