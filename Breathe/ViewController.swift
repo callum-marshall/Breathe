@@ -65,6 +65,16 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         
         mapView.addAnnotations(pointAnnotations)
     }
+    
+    func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
+        guard annotation is MGLPointAnnotation else {
+            return nil
+        }
+        
+        let reuseIdentifier = "\(annotation.coordinate.longitude)"
+        
+        
+    }
 
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
         // Wait for the map to load before initiating first camera movement
