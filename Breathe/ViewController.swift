@@ -1,7 +1,7 @@
 
 import UIKit
 import Mapbox
-import SwiftyJSON
+import SwiftyJSON 
 import Alamofire
 
 class ViewController: UIViewController, MGLMapViewDelegate {
