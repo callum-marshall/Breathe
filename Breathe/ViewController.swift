@@ -6,6 +6,9 @@ import Alamofire
 
 class ViewController: UIViewController, MGLMapViewDelegate {
     
+    var mapView: MGLMapView!
+    let layerIdentifier = "borough-layer"
+    
     override func viewDidLoad() {
 
         // for each borough
@@ -50,6 +53,21 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         view.addSubview(mapView)
         
         
+//        let singleTap = UITapGestureRecognizer(target: self, action:
+//            #selector(handleMapTap(sender:)))
+//        for recognizer in mapView.gestureRecognizers! where recognizer is UITapGestureRecognizer {
+//            singleTap.require(toFail: recognizer)
+//        }
+//        mapView.addGestureRecognizer(singleTap)
+        
+    }
+    
+    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
+        
+        let url = URL(string: "mapbox://mapbox.enterprise-boundaries-a0-v2")!
+        let source = MGLVectorTileSource(identifier: "state-source", configurationURL: url)
+        style.addSource(source)
+        
     }
     
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
@@ -63,10 +81,10 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         
         if annotationView == nil {
             annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
-            annotationView!.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
+            annotationView!.bounds = CGRect(x: 0, y: 0, width: 60, height: 60)
             
             let hue = CGFloat(annotation.coordinate.longitude) / 100
-            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
+            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 0.5)
         }
         
         return annotationView
@@ -117,17 +135,19 @@ class CustomAnnotationView: MGLAnnotationView {
         
         // Use CALayer’s corner radius to turn this view into a circle.
         layer.cornerRadius = bounds.width / 2
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.white.cgColor
+//        layer.borderWidth = 0
+//        layer.borderColor = UIColor.white.cgColor
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Animate the border width in/out, creating an iris effect.
-        let animation = CABasicAnimation(keyPath: "borderWidth")
-        animation.duration = 0.1
-        layer.borderWidth = selected ? bounds.width / 4 : 2
-        layer.add(animation, forKey: "borderWidth")
+//        let animation = CABasicAnimation(keyPath: "borderWidth")
+//        animation.duration = 0.1
+//        layer.borderWidth = selected ? bounds.width / 8 : 2
+//        layer.add(animation, forKey: "borderWidth")
     }
 }
+
+
