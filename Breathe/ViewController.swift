@@ -49,21 +49,7 @@ class ViewController: UIViewController, MGLMapViewDelegate {
 
         view.addSubview(mapView)
         
-//        Coordinates
-        let coordinates = [
-            CLLocationCoordinate2D(latitude: 51.5099, longitude: -0.0059)
-        ]
         
-//        Point annotations
-        var pointAnnotations = [MGLPointAnnotation]()
-        for coordinate in coordinates {
-            let point = MGLPointAnnotation()
-            point.coordinate = coordinate
-            point.title = "Tower Hamlets"
-            pointAnnotations.append(point)
-        }
-        
-        mapView.addAnnotations(pointAnnotations)
     }
     
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
@@ -101,6 +87,26 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         // Animate the camera movement over 5 seconds
         mapView.setCamera(camera, withDuration: 3, animationTimingFunction:
             CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
+        
+        for i in 0..<boroughData.count {
+            
+            //        Coordinates
+            let coordinates = [
+                CLLocationCoordinate2D(latitude: boroughData[i].lat, longitude: boroughData[i].lon)
+            ]
+            
+            //        Point annotations
+            var pointAnnotations = [MGLPointAnnotation]()
+            for coordinate in coordinates {
+                let point = MGLPointAnnotation()
+                point.coordinate = coordinate
+                point.title = boroughData[i].name
+                point.subtitle = "PM10: \(boroughData[i].PM10)"
+                pointAnnotations.append(point)
+            }
+            
+            mapView.addAnnotations(pointAnnotations)
+        }
     }
     
 }
