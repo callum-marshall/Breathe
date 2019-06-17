@@ -48,6 +48,22 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         mapView.setCenter(center, zoomLevel: 6, direction: 0, animated: false)
 
         view.addSubview(mapView)
+        
+//        Coordinates
+        let coordinates = [
+            CLLocationCoordinate2D(latitude: 51.5099, longitude: -0.0059)
+        ]
+        
+//        Point annotations
+        var pointAnnotations = [MGLPointAnnotation]()
+        for coordinate in coordinates {
+            let point = MGLPointAnnotation()
+            point.coordinate = coordinate
+            point.title = "\(coordinate.latitude), \(coordinate.longitude)"
+            pointAnnotations.append(point)
+        }
+        
+        mapView.addAnnotations(pointAnnotations)
     }
 
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
