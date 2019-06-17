@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GHi-nb-N0z">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GHi-nb-N0z">
                                 <rect key="frame" x="0.0" y="88" width="253" height="725"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XjL-Ip-7YZ">
@@ -34,19 +34,30 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.022429414802378238" green="0.019879550141110407" blue="0.17128805051813467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="725" id="4Uz-vB-eac"/>
-                                    <constraint firstAttribute="width" constant="253" id="tao-5T-YMg"/>
+                                    <constraint firstAttribute="width" constant="253" id="2DG-gl-Hd9"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="GHi-nb-N0z" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="6NH-xD-T4E"/>
+                            <constraint firstItem="GHi-nb-N0z" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Q5U-Du-Awk"/>
+                            <constraint firstItem="GHi-nb-N0z" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="bQQ-h5-CCt"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Menu" id="jgr-ys-Cy8">
-                        <barButtonItem key="leftBarButtonItem" title="Locations" image="icons8-menu-26" id="cuF-MU-o9m"/>
+                        <barButtonItem key="leftBarButtonItem" title="Locations" image="icons8-menu-26" id="cuF-MU-o9m">
+                            <connections>
+                                <action selector="openMenu:" destination="BYZ-38-t0r" id="cNr-uG-bnO"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="LeadingConstraint" destination="6NH-xD-T4E" id="Rfe-HW-Sda"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

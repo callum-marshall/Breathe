@@ -6,6 +6,10 @@ import Alamofire
 
 class ViewController: UIViewController, MGLMapViewDelegate {
     
+    var menuShowing = false
+    
+    @IBOutlet weak var LeadingConstraint: NSLayoutConstraint!
+    
     override func viewDidLoad() {
 
         // for each borough
@@ -50,6 +54,20 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         view.addSubview(mapView)
         
         
+    }
+    
+    
+    @IBAction func openMenu(_ sender: Any) {
+        if (menuShowing) {
+            LeadingConstraint.constant = -150
+        } else {
+            LeadingConstraint.constant = 0
+            UIView.animate(withDuration: 0.2, delay: 0.0, options: .curveEaseIn, animations:
+                {
+                    self.view.layoutIfNeeded()
+                })
+        }
+        menuShowing = !menuShowing
     }
     
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
