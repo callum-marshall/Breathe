@@ -94,7 +94,8 @@ class ContainerController: UIViewController {
             print("Show Notifications")
 
         case .Settings:
-            print("Show Settings")
+            let controller = SettingsController()
+            present(UINavigationController(rootViewController: controller), animated: true, completion: nil)
 
         }
     }
