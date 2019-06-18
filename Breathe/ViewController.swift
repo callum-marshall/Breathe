@@ -6,6 +6,8 @@ import Alamofire
 
 class ViewController: UIViewController, MGLMapViewDelegate {
     
+
+    
     override func viewDidLoad() {
 
         // for each borough
@@ -34,12 +36,13 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         
         super.viewDidLoad()
         // Do any additional setup after loading the view
-
-        let mapView = MGLMapView(frame: view.bounds)
+        
+        let url = URL(string: "mapbox://styles/xain08/cjx1kdz9u278u1cpivf40mqux")
+        let mapView = MGLMapView(frame: view.bounds, styleURL: url)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.delegate = self
 
-        mapView.styleURL = MGLStyle.streetsStyleURL
+        
 
         // coordinates for London, UK
         let center = CLLocationCoordinate2D(latitude: 51.509865, longitude: -0.118092)
@@ -49,6 +52,13 @@ class ViewController: UIViewController, MGLMapViewDelegate {
 
         view.addSubview(mapView)
         
+        
+//        let singleTap = UITapGestureRecognizer(target: self, action:
+//            #selector(handleMapTap(sender:)))
+//        for recognizer in mapView.gestureRecognizers! where recognizer is UITapGestureRecognizer {
+//            singleTap.require(toFail: recognizer)
+//        }
+//        mapView.addGestureRecognizer(singleTap)
         
     }
     
@@ -66,7 +76,7 @@ class ViewController: UIViewController, MGLMapViewDelegate {
             annotationView!.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
             
             let hue = CGFloat(annotation.coordinate.longitude) / 100
-            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
+            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 0.5)
         }
         
         return annotationView
@@ -74,16 +84,17 @@ class ViewController: UIViewController, MGLMapViewDelegate {
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
+        
     }
-
+    
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
         // Wait for the map to load before initiating first camera movement
-
+        
         // Create a camera that rotates around center point
-
+        
         let camera = MGLMapCamera(lookingAtCenter: mapView.centerCoordinate, altitude: 100000,
                                   pitch: 3, heading: 0)
-
+        
         // Animate the camera movement over 5 seconds
         mapView.setCamera(camera, withDuration: 3, animationTimingFunction:
             CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
@@ -109,7 +120,71 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         }
     }
     
+    
+    
+    
+
+    
+    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
+//        let url = URL(string: "mapbox://styles/xain08/cjx1kdz9u278u1cpivf40mqux")!
+//        let source = MGLVectorTileSource(identifier: "borough-source", configurationURL: url)
+//        style.addSource(source)
+//
+//        let layer = MGLFillStyleLayer(identifier: layerIdentifier, source: source)
+//
+//        // Access the tileset layer.
+//        layer.sourceLayerIdentifier = "statistical-gis-boundaries-lo-c0wr80"
+//
+//        // Create a stops dictionary. This defines the relationship between population density and a UIColor.
+//        let stops = [0: UIColor.yellow,
+//                     600: UIColor.red,
+//                     1200: UIColor.blue]
+//
+//        // Style the fill color using the stops dictionary, exponential interpolation mode, and the feature attribute name.
+//        layer.fillColor = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:(density, 'linear', nil, %@)", stops)
+//
+//        // Insert the new layer below the Mapbox Streets layer that contains state border lines. See the layer reference for more information about layer names: https://www.mapbox.com/vector-tiles/mapbox-streets-v8/
+//        // admin-1-boundary is available starting in mapbox-streets-v8, while admin-3-4-boundaries is provided here as a fallback for styles using older data sources.
+//        if let symbolLayer = style.layer(withIdentifier: "admin-1-boundary") ?? style.layer(withIdentifier: "admin-3-4-boundaries") {
+//            style.insertLayer(layer, below: symbolLayer)
+//        } else {
+//            fatalError("Layer with specified identifier not found in current style")
+//        }
+        
+    }
+    
+//    @objc @IBAction func handleMapTap(sender: UITapGestureRecognizer) {
+//        // Get the CGPoint where the user tapped.
+//        let spot = sender.location(in: mapView)
+//
+//        // Access the features at that point within the state layer.
+//        let features = mapView.visibleFeatures(at: spot, styleLayerIdentifiers: Set([layerIdentifier]))
+//
+//        // Get the name of the selected state.
+//        if let feature = features.first, let state = feature.attribute(forKey: "name") as? String {
+//            changeOpacity(name: state)
+//        } else {
+//            changeOpacity(name: "")
+//        }
+//    }
+//
+//    func changeOpacity(name: String) {
+//        guard let layer = mapView.style?.layer(withIdentifier: layerIdentifier) as? MGLFillStyleLayer else {
+//            fatalError("Could not cast to specified MGLFillStyleLayer")
+//        }
+//        // Check if a state was selected, then change the opacity of the states that were not selected.
+//        if !name.isEmpty {
+//            layer.fillOpacity = NSExpression(format: "TERNARY(name = %@, 1, 0)", name)
+//        } else {
+//            // Reset the opacity for all states if the user did not tap on a state.
+//            layer.fillOpacity = NSExpression(forConstantValue: 1)
+//        }
+//    }
+    
 }
+
+
+
 
 class CustomAnnotationView: MGLAnnotationView {
     override func layoutSubviews() {
@@ -117,17 +192,20 @@ class CustomAnnotationView: MGLAnnotationView {
         
         // Use CALayer’s corner radius to turn this view into a circle.
         layer.cornerRadius = bounds.width / 2
-        layer.borderWidth = 2
-        layer.borderColor = UIColor.white.cgColor
+//        layer.borderWidth = 0
+//        layer.borderColor = UIColor.white.cgColor
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
         // Animate the border width in/out, creating an iris effect.
-        let animation = CABasicAnimation(keyPath: "borderWidth")
-        animation.duration = 0.1
-        layer.borderWidth = selected ? bounds.width / 4 : 2
-        layer.add(animation, forKey: "borderWidth")
+//        let animation = CABasicAnimation(keyPath: "borderWidth")
+//        animation.duration = 0.1
+//        layer.borderWidth = selected ? bounds.width / 8 : 2
+//        layer.add(animation, forKey: "borderWidth")
     }
 }
+
+
+
