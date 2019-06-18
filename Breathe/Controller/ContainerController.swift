@@ -27,6 +27,14 @@ class ContainerController: UIViewController {
         return .lightContent
     }
     
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return isExpanded
+    }
+    
     // MARK: - Handlers
     
     func configureHomeController() {
@@ -69,6 +77,8 @@ class ContainerController: UIViewController {
                 self.didSelectMenuOption(menuOption: menuOption)
             }
         }
+        
+        animateStatusBar()
     }
     
     func didSelectMenuOption(menuOption: MenuOption) {
@@ -76,6 +86,7 @@ class ContainerController: UIViewController {
             
         case .Profile:
             print("Show Profile")
+            
         case .Inbox:
             print("Show Inbox")
 
@@ -86,6 +97,12 @@ class ContainerController: UIViewController {
             print("Show Settings")
 
         }
+    }
+    
+    func animateStatusBar() {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: .curveEaseInOut, animations: {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }, completion: nil)
     }
 }
 
