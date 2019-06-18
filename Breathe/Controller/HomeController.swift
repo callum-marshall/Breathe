@@ -8,6 +8,7 @@ class HomeController: UIViewController {
         
     // MARK: - Properties
     
+    var delegate: HomeControllerDelegate?
     
     // MARK: - Init
     
@@ -22,7 +23,8 @@ class HomeController: UIViewController {
     // MARK: - Handlers
     
     @objc func handleMenuToggle() {
-        print("Toggle menu...")
+        delegate?.handleMenuToggle()
+        
     }
     
     func configureNavigationBar() {

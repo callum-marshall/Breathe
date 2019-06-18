@@ -12,6 +12,7 @@ class ContainerController: UIViewController {
     
     // MARK: - Properties
     
+    var menuController: UIViewController!
     
     // MARK: - Init
     
@@ -28,6 +29,7 @@ class ContainerController: UIViewController {
     
     func configureHomeController() {
         let homeController = HomeController()
+        homeController.delegate = self
         let controller = UINavigationController(rootViewController: homeController)
         
         view.addSubview(controller.view)
@@ -36,7 +38,20 @@ class ContainerController: UIViewController {
     }
     
     func configureMenuController() {
-    
+        if menuController == nil {
+//            add our menu controller
+            menuController = MenuController()
+            view.insertSubview(menuController.view, at: 0)
+            addChild(menuController)
+            menuController.didMove(toParent: self)
+            print("Did add menu controller")
+        }
     }
     
+}
+
+extension ContainerController: HomeControllerDelegate {
+    func handleMenuToggle() {
+        configureMenuController()
+    }
 }
