@@ -10,7 +10,6 @@ class ViewController: UIViewController, MGLMapViewDelegate {
     let layerIdentifier = "statistical-gis-boundaries-lo-c0wr80"
     
     
-    
     override func viewDidLoad() {
         
         // for each borough
@@ -49,7 +48,6 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         mapView.showsUserLocation = true
         
         
-        
         // coordinates for London, UK
         let center = CLLocationCoordinate2D(latitude: 51.509865, longitude: -0.118092)
         
@@ -58,18 +56,60 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         
         view.addSubview(mapView)
         
-        
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleMapTap(sender:)))
         for recognizer in mapView.gestureRecognizers! where recognizer is UITapGestureRecognizer {
             singleTap.require(toFail: recognizer)
         }
         mapView.addGestureRecognizer(singleTap)
         
+        let centerScreenPoint:CGPoint = mapView.convert(mapView.centerCoordinate, toPointTo: nil)
+        
     }
     
-    @objc func handleMapTap(sender: UITapGestureRecognizer) {
-        print("double")
+    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
+        // Load a tileset containing U.S. states and their population density. For more information about working with tilesets, see: https://www.mapbox.com/help/studio-manual-tilesets/
+        let url = URL(string: "mapbox://xain08.8hlzdj8n")!
+        let source = MGLVectorTileSource(identifier: "statistical-gis-boundaries-lo-c0wr80", configurationURL: url)
+        style.addSource(source)
+        
+        let layer = MGLFillStyleLayer(identifier: layerIdentifier, source: source)
+        
+        // Access the tileset layer.
+        layer.sourceLayerIdentifier = "statistical-gis-boundaries-lo-c0wr80"
+        
+        
     }
+    
+
+    @objc @IBAction func handleMapTap(sender: UITapGestureRecognizer) {
+        
+        let tapPoint: CGPoint = sender.location(in: mapView)
+        let tapCoordinate: CLLocationCoordinate2D = mapView.convert(tapPoint, toCoordinateFrom: nil)
+        print("You tapped at: \(tapCoordinate.latitude), \(tapCoordinate.longitude)")
+
+//        let spot = sender.location(in: mapView)
+//        let features = mapView.visibleFeatures(at: spot, styleLayerIdentifiers:
+//            Set([layerIdentifier]))
+//
+//        print("double")
+       
+    }
+    
+    func changeOpacity(name: String) {
+        guard let layer = mapView.style?.layer(withIdentifier: layerIdentifier) as? MGLFillStyleLayer else {
+            fatalError("Could not cast to specified MGLFillStyleLayer")
+        }
+        // Check if a state was selected, then change the opacity of the states that were not selected.
+        if !name.isEmpty {
+            layer.fillOpacity = NSExpression(format: "TERNARY(name = %@, 1, 0)", name)
+        } else {
+            // Reset the opacity for all states if the user did not tap on a state.
+            layer.fillOpacity = NSExpression(forConstantValue: 1)
+        }
+    }
+    
+
+ 
     
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
         guard annotation is MGLPointAnnotation else {
@@ -91,10 +131,13 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         return annotationView
     }
     
+
+    
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
         
     }
+    
     
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
         // Wait for the map to load before initiating first camera movement
@@ -131,11 +174,6 @@ class ViewController: UIViewController, MGLMapViewDelegate {
     
     
     
-    
-    
-    func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
-        //
-    }
     
     class CustomAnnotationView: MGLAnnotationView {
         override func layoutSubviews() {
