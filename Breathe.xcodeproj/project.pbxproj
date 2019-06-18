@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01F9CE5522B78E69004EF4C1 /* Boroughs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F9CE5422B78E69004EF4C1 /* Boroughs.swift */; };
+		3F96FBC022B9273E001C9316 /* ModelOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F96FBBF22B9273E001C9316 /* ModelOption.swift */; };
 		3F9F435C22B51DA000CAB4A4 /* LocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F9F435B22B51DA000CAB4A4 /* LocationData.swift */; };
 		3FA5996E22B155450099B43B /* NetworkingClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA5996D22B155450099B43B /* NetworkingClient.swift */; };
 		3FAB8A8A22AE850E00E053E7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FAB8A8922AE850E00E053E7 /* AppDelegate.swift */; };
@@ -46,6 +47,7 @@
 /* Begin PBXFileReference section */
 		01F9CE5422B78E69004EF4C1 /* Boroughs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Boroughs.swift; sourceTree = "<group>"; };
 		325BE28A1CD460567897ECEF /* Pods_Breathe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Breathe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3F96FBBF22B9273E001C9316 /* ModelOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelOption.swift; sourceTree = "<group>"; };
 		3F9F435B22B51DA000CAB4A4 /* LocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationData.swift; sourceTree = "<group>"; };
 		3FA5996D22B155450099B43B /* NetworkingClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingClient.swift; sourceTree = "<group>"; };
 		3FAB8A8622AE850E00E053E7 /* Breathe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breathe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -170,6 +172,7 @@
 		44FCF3FC22B8EB620011EB69 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3F96FBBF22B9273E001C9316 /* ModelOption.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				44FCF40522B8F8D20011EB69 /* Protocols.swift in Sources */,
 				44FCF40322B8EBBE0011EB69 /* ContainerController.swift in Sources */,
 				3FA5996E22B155450099B43B /* NetworkingClient.swift in Sources */,
+				3F96FBC022B9273E001C9316 /* ModelOption.swift in Sources */,
 				3FAB8A9222AE850E00E053E7 /* Breathe.xcdatamodeld in Sources */,
 				3FAB8A8A22AE850E00E053E7 /* AppDelegate.swift in Sources */,
 				3F9F435C22B51DA000CAB4A4 /* LocationData.swift in Sources */,
