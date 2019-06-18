@@ -6,23 +6,26 @@ import Alamofire
 
 class ViewController: UIViewController, MGLMapViewDelegate {
     
-
+    var mapView: MGLMapView!
+    let layerIdentifier = "statistical-gis-boundaries-lo-c0wr80"
+    
+    
     
     override func viewDidLoad() {
-
+        
         // for each borough
         for i in 0..<boroughData.count {
             
-            // interpolate the 'lat' and 'lon' in the api URL
+            // interpolate the ‘lat’ and ‘lon’ in the api URL
             let apiURL = "http://api.erg.kcl.ac.uk/AirQuality/Data/Nowcast/lat=\(boroughData[i].lat)/lon=\(boroughData[i].lon)/Json"
             
             // make an API request with the api URL
             Alamofire.request(apiURL).responseJSON { (responseData) -> Void in
                 
-                // if the value of the result isn't nil
+                // if the value of the result isn’t nil
                 if((responseData.result.value) != nil) {
                     
-                    // save the resulting data (from the key 'PointResult') to a variable
+                    // save the resulting data (from the key ‘PointResult’) to a variable
                     let jsonData = JSON(responseData.result.value!)["PointResult"]
                     
                     // add the response data to the borough object using our new JSON variable
@@ -37,29 +40,35 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view
         
+        
         let url = URL(string: "mapbox://styles/xain08/cjx1kdz9u278u1cpivf40mqux")
         let mapView = MGLMapView(frame: view.bounds, styleURL: url)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.delegate = self
-
         
-
+        mapView.showsUserLocation = true
+        
+        
+        
         // coordinates for London, UK
         let center = CLLocationCoordinate2D(latitude: 51.509865, longitude: -0.118092)
-
+        
         // set starting point
         mapView.setCenter(center, zoomLevel: 6, direction: 0, animated: false)
-
+        
         view.addSubview(mapView)
         
         
-//        let singleTap = UITapGestureRecognizer(target: self, action:
-//            #selector(handleMapTap(sender:)))
-//        for recognizer in mapView.gestureRecognizers! where recognizer is UITapGestureRecognizer {
-//            singleTap.require(toFail: recognizer)
-//        }
-//        mapView.addGestureRecognizer(singleTap)
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleMapTap(sender:)))
+        for recognizer in mapView.gestureRecognizers! where recognizer is UITapGestureRecognizer {
+            singleTap.require(toFail: recognizer)
+        }
+        mapView.addGestureRecognizer(singleTap)
         
+    }
+    
+    @objc func handleMapTap(sender: UITapGestureRecognizer) {
+        print("double")
     }
     
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
@@ -112,7 +121,7 @@ class ViewController: UIViewController, MGLMapViewDelegate {
                 let point = MGLPointAnnotation()
                 point.coordinate = coordinate
                 point.title = boroughData[i].name
-                point.subtitle = "PM10: \(boroughData[i].PM10)"
+                point.subtitle = "O3: \(boroughData[i].O3)"
                 pointAnnotations.append(point)
             }
             
@@ -123,88 +132,34 @@ class ViewController: UIViewController, MGLMapViewDelegate {
     
     
     
-
     
     func mapView(_ mapView: MGLMapView, didFinishLoading style: MGLStyle) {
-//        let url = URL(string: "mapbox://styles/xain08/cjx1kdz9u278u1cpivf40mqux")!
-//        let source = MGLVectorTileSource(identifier: "borough-source", configurationURL: url)
-//        style.addSource(source)
-//
-//        let layer = MGLFillStyleLayer(identifier: layerIdentifier, source: source)
-//
-//        // Access the tileset layer.
-//        layer.sourceLayerIdentifier = "statistical-gis-boundaries-lo-c0wr80"
-//
-//        // Create a stops dictionary. This defines the relationship between population density and a UIColor.
-//        let stops = [0: UIColor.yellow,
-//                     600: UIColor.red,
-//                     1200: UIColor.blue]
-//
-//        // Style the fill color using the stops dictionary, exponential interpolation mode, and the feature attribute name.
-//        layer.fillColor = NSExpression(format: "mgl_interpolate:withCurveType:parameters:stops:(density, 'linear', nil, %@)", stops)
-//
-//        // Insert the new layer below the Mapbox Streets layer that contains state border lines. See the layer reference for more information about layer names: https://www.mapbox.com/vector-tiles/mapbox-streets-v8/
-//        // admin-1-boundary is available starting in mapbox-streets-v8, while admin-3-4-boundaries is provided here as a fallback for styles using older data sources.
-//        if let symbolLayer = style.layer(withIdentifier: "admin-1-boundary") ?? style.layer(withIdentifier: "admin-3-4-boundaries") {
-//            style.insertLayer(layer, below: symbolLayer)
-//        } else {
-//            fatalError("Layer with specified identifier not found in current style")
-//        }
-        
+        //
     }
     
-//    @objc @IBAction func handleMapTap(sender: UITapGestureRecognizer) {
-//        // Get the CGPoint where the user tapped.
-//        let spot = sender.location(in: mapView)
-//
-//        // Access the features at that point within the state layer.
-//        let features = mapView.visibleFeatures(at: spot, styleLayerIdentifiers: Set([layerIdentifier]))
-//
-//        // Get the name of the selected state.
-//        if let feature = features.first, let state = feature.attribute(forKey: "name") as? String {
-//            changeOpacity(name: state)
-//        } else {
-//            changeOpacity(name: "")
-//        }
-//    }
-//
-//    func changeOpacity(name: String) {
-//        guard let layer = mapView.style?.layer(withIdentifier: layerIdentifier) as? MGLFillStyleLayer else {
-//            fatalError("Could not cast to specified MGLFillStyleLayer")
-//        }
-//        // Check if a state was selected, then change the opacity of the states that were not selected.
-//        if !name.isEmpty {
-//            layer.fillOpacity = NSExpression(format: "TERNARY(name = %@, 1, 0)", name)
-//        } else {
-//            // Reset the opacity for all states if the user did not tap on a state.
-//            layer.fillOpacity = NSExpression(forConstantValue: 1)
-//        }
-//    }
-    
-}
-
-
-
-
-class CustomAnnotationView: MGLAnnotationView {
-    override func layoutSubviews() {
-        super.layoutSubviews()
+    class CustomAnnotationView: MGLAnnotationView {
+        override func layoutSubviews() {
+            super.layoutSubviews()
+            
+            // Use CALayer’s corner radius to turn this view into a circle.
+            layer.cornerRadius = bounds.width / 2
+            //        layer.borderWidth = 0
+            //        layer.borderColor = UIColor.white.cgColor
+        }
         
-        // Use CALayer’s corner radius to turn this view into a circle.
-        layer.cornerRadius = bounds.width / 2
-//        layer.borderWidth = 0
-//        layer.borderColor = UIColor.white.cgColor
+        override func setSelected(_ selected: Bool, animated: Bool) {
+            super.setSelected(selected, animated: animated)
+            
+            // Animate the border width in/out, creating an iris effect.
+            //        let animation = CABasicAnimation(keyPath: “borderWidth”)
+            //        animation.duration = 0.1
+            //        layer.borderWidth = selected ? bounds.width / 8 : 2
+            //        layer.add(animation, forKey: “borderWidth”)
+        }
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Animate the border width in/out, creating an iris effect.
-//        let animation = CABasicAnimation(keyPath: "borderWidth")
-//        animation.duration = 0.1
-//        layer.borderWidth = selected ? bounds.width / 8 : 2
-//        layer.add(animation, forKey: "borderWidth")
-    }
+    
+    
 }
 
 
