@@ -1,34 +1,33 @@
-//
-//  ModelOption.swift
-//  Breathe
-//
-//  Created by Student on 18/06/2019.
-//  Copyright © 2019 Student. All rights reserved.
-//
 
 import UIKit
 
 enum MenuOption: Int, CustomStringConvertible {
     
-    case Profile
-    case Inbox
-    case Notifications
-    case Settings
+    case CurrentLocation
+    case RecentLocations
+    case London
+    case Delhi
+    case MexicoCity
+    case NewYork
     
     var description: String {
         switch self {
-        case .Profile: return "Profile"
-        case .Inbox: return "Inbox"
-        case .Notifications: return "Notifications"
-        case .Settings: return "Settings"
+        case .CurrentLocation: return "Current Location"
+        case .RecentLocations: return "Recent Locations"
+        case .London: return "London"
+        case .Delhi: return "Delhi"
+        case .MexicoCity: return "Mexico City"
+        case .NewYork: return "New York"
         }
     }
     var image: UIImage {
         switch self {
-        case .Profile: return UIImage(named: "hamburger-1") ?? UIImage()
-        case .Inbox: return UIImage(named: "hamburger-1") ?? UIImage()
-        case .Notifications: return UIImage(named: "hamburger-1") ?? UIImage()
-        case .Settings: return UIImage(named: "hamburger-1") ?? UIImage()
+        case .CurrentLocation: return UIImage(named: "icons8-marker-50") ?? UIImage()
+        case .RecentLocations: return UIImage(named: "icons8-marker-50") ?? UIImage()
+        case .London: return UIImage(named: "icons8-world-map-80") ?? UIImage()
+        case .Delhi: return UIImage(named: "icons8-world-map-80") ?? UIImage()
+        case .MexicoCity: return UIImage(named: "icons8-world-map-80") ?? UIImage()
+        case .NewYork: return UIImage(named: "icons8-world-map-80") ?? UIImage()
         }
     }
 }

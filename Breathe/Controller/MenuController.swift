@@ -1,10 +1,3 @@
-//
-//  MenuController.swift
-//  Breathe
-//
-//  Created by Kiah Hewitt on 18/06/2019.
-//  Copyright © 2019 Student. All rights reserved.
-//
 
 import UIKit
 
@@ -35,7 +28,7 @@ class MenuController: UIViewController {
         tableView.register(MenuOptionCell.self, forCellReuseIdentifier: reuseIdentifier)
         tableView.backgroundColor = .darkGray
         tableView.separatorStyle = .none
-        tableView.rowHeight = 80 
+        tableView.rowHeight = 40
         
         view.addSubview(tableView)
         
@@ -50,7 +43,7 @@ class MenuController: UIViewController {
 
 extension MenuController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return 6
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

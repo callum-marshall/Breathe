@@ -1,21 +1,12 @@
-//
-//  ContainerController.swift
-//  Breathe
-//
-//  Created by Kiah Hewitt on 18/06/2019.
-//  Copyright © 2019 Student. All rights reserved.
-//
 
 import Mapbox
 import UIKit
 
-class ContainerController: UIViewController, MGLMapViewDelegate {
+class ContainerController: UIViewController {
     
     // MARK: - Properties
     
-    var homeController: HomeController!
     var menuController: MenuController!
-    var mapView: MGLMapView!
     var centerController: UIViewController!
     var isExpanded = false
     
@@ -87,27 +78,12 @@ class ContainerController: UIViewController, MGLMapViewDelegate {
     func didSelectMenuOption(menuOption: MenuOption) {
         switch menuOption {
             
-        case .Profile:
-            print("Show Profile")
-            homeController = HomeController()
-            homeController.delegate = self
-            // prints to console
-            homeController.testMenu()
-            mapView = MGLMapView()
-            mapView.centerCoordinate = CLLocationCoordinate2D (latitude: 69, longitude: 42.0)
-            homeController.setMapViewLocation(mapView) 
-            
-        case .Inbox:
-            print("Show Inbox")
-
-        case .Notifications:
-            print("Show Notifications")
-
-        case .Settings:
-            print("Show Settings")
-            let controller = SettingsController()
-            controller.borough = "Camden"
-            present(UINavigationController(rootViewController: controller), animated: true, completion: nil)
+        case .CurrentLocation: print("button press")
+        case .RecentLocations: print("button press")
+        case .London: print("button press")
+        case .Delhi: print("button press")
+        case .MexicoCity: print("button press")
+        case .NewYork: print("button press")
 
         }
     }
