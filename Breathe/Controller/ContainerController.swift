@@ -95,6 +95,7 @@ class ContainerController: UIViewController {
 
         case .Settings:
             let controller = SettingsController()
+            controller.borough = "Camden"
             present(UINavigationController(rootViewController: controller), animated: true, completion: nil)
 
         }

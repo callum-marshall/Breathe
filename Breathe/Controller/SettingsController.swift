@@ -11,12 +11,23 @@ import UIKit
 class SettingsController: UIViewController {
     //    MARK: - Properties
     
+    var borough: String?
+    
     //    MARK: - Init
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
+        
+        // MARK: - Example of Passing in Data
+        
+        if let borough = borough {
+            print("\(borough) has PM10: 5")
+        } else {
+            print("Borough not found")
+        }
+        
     }
     
     //    MARK: - Selectors
