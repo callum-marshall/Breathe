@@ -5,6 +5,7 @@ import SwiftyJSON
 import Alamofire
 
 class ViewController: UIViewController, MGLMapViewDelegate {
+//    @IBOutlet var textView: UITextView!
     
 //    var mapView: MGLMapView!
     
@@ -52,6 +53,8 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         // set starting point
         mapView.setCenter(center, zoomLevel: 6, direction: 0, animated: false)
         view.addSubview(mapView)
+        
+        mapView.showsUserLocation = true
         
     }
     
@@ -135,7 +138,10 @@ class ViewController: UIViewController, MGLMapViewDelegate {
                 CLLocationCoordinate2D(latitude: boroughData[i].lat, longitude: boroughData[i].lon)
             ]
             
-            var info: String = "Ozone: \(boroughData[i].O3) \n Nitrogen Dioxide: \(boroughData[i].NO2) \n Particulate Matter 10: \(boroughData[i].PM10) \n Particulate Matter 2.5: \(boroughData[i].PM25)"
+            let string = "Google"
+            let attributedString = NSMutableAttributedString(string: string, attributes:[NSAttributedString.Key.link: URL(string: "http://www.google.com")!])
+            
+            var info: String = "\(attributedString) \n Ozone: \(boroughData[i].O3) \n Nitrogen Dioxide: \(boroughData[i].NO2) \n Particulate Matter 10: \(boroughData[i].PM10) \n Particulate Matter 2.5: \(boroughData[i].PM25)"
             
             
             //        Point annotations
