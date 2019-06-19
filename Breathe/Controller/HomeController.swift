@@ -9,6 +9,7 @@ class HomeController: UIViewController, MGLMapViewDelegate {
     // MARK: - Properties
     
     var delegate: HomeControllerDelegate?
+    var setLocation = [60.00, -60.118092]
     
     // MARK: - Init
     
@@ -19,7 +20,6 @@ class HomeController: UIViewController, MGLMapViewDelegate {
         
         configureNavigationBar()
 //        ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
         
                 // for each borough
                 for i in 0..<boroughData.count {
@@ -48,14 +48,15 @@ class HomeController: UIViewController, MGLMapViewDelegate {
                 super.viewDidLoad()
                 // Do any additional setup after loading the view
         
-                let mapView = MGLMapView(frame: view.bounds)
+                let url = URL(string: "mapbox://styles/xain08/cjx1kdz9u278u1cpivf40mqux")
+                let mapView = MGLMapView(frame: view.bounds, styleURL: url)
                 mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 mapView.delegate = self
         
-                mapView.styleURL = MGLStyle.streetsStyleURL
-        
                 // coordinates for London, UK
+//                var center = CLLocationCoordinate2D(latitude: 51.509865, longitude: -0.118092)
                 let center = CLLocationCoordinate2D(latitude: 51.509865, longitude: -0.118092)
+
         
                 // set starting point
                 mapView.setCenter(center, zoomLevel: 6, direction: 0, animated: false)
@@ -78,7 +79,7 @@ class HomeController: UIViewController, MGLMapViewDelegate {
                 annotationView!.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
     
                 let hue = CGFloat(annotation.coordinate.longitude) / 100
-                annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
+                annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 0.5)
             }
     
             return annotationView
@@ -88,11 +89,33 @@ class HomeController: UIViewController, MGLMapViewDelegate {
             return true
         }
     
+        func testMenu() {
+            print("this works")
+            
+        }
+    
+    func setMapViewLocation(_ mapView: MGLMapView) {
+        
+        print(mapView.centerCoordinate)
+            let camera = MGLMapCamera(lookingAtCenter: mapView.centerCoordinate, altitude: 100000, pitch: 3, heading: 0)
+                mapView.fly(to: camera, withDuration: 4, peakAltitude: 3000, completionHandler: nil)
+            
+            view.addSubview(mapView)
+        
+//            print(mapView.centerCoordinate)
+//            mapView.centerCoordinate =
+//
+//            var camera = MGLMapCamera()
+//            camera.setCenter(CLLocationCoordinate2D(latitude: setLocation[0], longitude: setLocation[1]), zoomLevel: 9, animated: false)
+//
+//            mapView.fly(to: camera, withDuration: 0.0, completionHandler: <#T##(() -> Void)?##(() -> Void)?##() -> Void#>)
+
+        }
+    
         func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
             // Wait for the map to load before initiating first camera movement
     
             // Create a camera that rotates around center point
-    
             let camera = MGLMapCamera(lookingAtCenter: mapView.centerCoordinate, altitude: 100000,
                                       pitch: 3, heading: 0)
     
@@ -121,8 +144,6 @@ class HomeController: UIViewController, MGLMapViewDelegate {
             }
         }
     
-    
-
     class CustomAnnotationView: MGLAnnotationView {
         override func layoutSubviews() {
             super.layoutSubviews()
@@ -158,8 +179,6 @@ class HomeController: UIViewController, MGLMapViewDelegate {
         navigationItem.title = "Side menu"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "hamburger-1").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMenuToggle))
     }
-    
-    
 }
 
 //class HomeController: UIViewController, MGLMapViewDelegate {

@@ -6,6 +6,7 @@
 //  Copyright © 2019 Student. All rights reserved.
 //
 
+import Mapbox
 import UIKit
 
 class SettingsController: UIViewController {
@@ -18,7 +19,24 @@ class SettingsController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureUI()
+        
+//        
+//        let mapView = MGLMapView(frame: view.bounds)
+//     
+////        mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+////        mapView.delegate = HomeController
+////
+////        mapView.styleURL = MGLStyle.streetsStyleURL
+////
+////        // coordinates for London, UK
+////        //                var center = CLLocationCoordinate2D(latitude: 51.509865, longitude: -0.118092)
+////        let center = CLLocationCoordinate2D(latitude: 51.509865, longitude: -0.118092)
+////
+////
+////        // set starting point
+//        mapView.setCenter(center, zoomLevel: 6, direction: 0, animated: false)
+////
+//        view.addSubview(mapView)
         
         // MARK: - Example of Passing in Data
         
@@ -38,7 +56,20 @@ class SettingsController: UIViewController {
     
     //    MARK: - Helper Functions
     
+//    func configureTableView() {
+//        tableview = UITableview()
+//        tableview.delegate = self
+//        tableview.dataSource = self
+//        table.rowHeight = 60
+//
+//        tableView.register(SettingsCell.self, for)
+//
+//        tableView.register(SettingsCell.self)
+//    }
+    
     func configureUI() {
+//        configureTableView()
+        
         view.backgroundColor = .white
         
         navigationController?.navigationBar.barTintColor = .darkGray

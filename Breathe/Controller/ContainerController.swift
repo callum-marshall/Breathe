@@ -6,13 +6,16 @@
 //  Copyright © 2019 Student. All rights reserved.
 //
 
+import Mapbox
 import UIKit
 
-class ContainerController: UIViewController {
+class ContainerController: UIViewController, MGLMapViewDelegate {
     
     // MARK: - Properties
     
+    var homeController: HomeController!
     var menuController: MenuController!
+    var mapView: MGLMapView!
     var centerController: UIViewController!
     var isExpanded = false
     
@@ -86,6 +89,13 @@ class ContainerController: UIViewController {
             
         case .Profile:
             print("Show Profile")
+            homeController = HomeController()
+            homeController.delegate = self
+            // prints to console
+            homeController.testMenu()
+            mapView = MGLMapView()
+            mapView.centerCoordinate = CLLocationCoordinate2D (latitude: 69, longitude: 42.0)
+            homeController.setMapViewLocation(mapView) 
             
         case .Inbox:
             print("Show Inbox")
@@ -94,6 +104,7 @@ class ContainerController: UIViewController {
             print("Show Notifications")
 
         case .Settings:
+            print("Show Settings")
             let controller = SettingsController()
             controller.borough = "Camden"
             present(UINavigationController(rootViewController: controller), animated: true, completion: nil)
