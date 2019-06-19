@@ -73,13 +73,9 @@ class HomeController: UIViewController, MGLMapViewDelegate {
         
         if annotationView == nil {
             annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
-            annotationView!.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
             annotationView!.bounds = CGRect(x: 0, y: 0, width: 60, height: 60)
             
-            
-            let hue = CGFloat(annotation.coordinate.longitude) / 100
-            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
-            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 0.2)
+            annotationView!.backgroundColor = UIColor(displayP3Red: 0.403, green: 0.447, blue: 0.439, alpha: 0.3)
         }
         
         
@@ -154,8 +150,8 @@ class HomeController: UIViewController, MGLMapViewDelegate {
     
             // Use CALayer’s corner radius to turn this view into a circle.
             layer.cornerRadius = bounds.width / 2
-            layer.borderWidth = 2
-            layer.borderColor = UIColor.white.cgColor
+            layer.borderWidth = 0
+//            layer.borderColor = UIColor.white.cgColor
         }
     
         override func setSelected(_ selected: Bool, animated: Bool) {
@@ -164,8 +160,6 @@ class HomeController: UIViewController, MGLMapViewDelegate {
             // Animate the border width in/out, creating an iris effect.
             let animation = CABasicAnimation(keyPath: "borderWidth")
             animation.duration = 0.1
-            layer.borderWidth = selected ? bounds.width / 4 : 2
-            layer.add(animation, forKey: "borderWidth")
         }
     }
 
