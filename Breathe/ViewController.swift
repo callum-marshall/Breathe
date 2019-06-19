@@ -6,8 +6,9 @@ import Alamofire
 
 class ViewController: UIViewController, MGLMapViewDelegate {
     
-    var mapView: MGLMapView!
-    let layerIdentifier = "statistical-gis-boundaries-lo-c0wr80"
+//    var mapView: MGLMapView!
+    
+//    let layerIdentifier = "statistical-gis-boundaries-lo-c0wr80"
     
     
     override func viewDidLoad() {
@@ -39,30 +40,18 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view
         
-        
+//
+//        let mapView = MGLMapView(frame: view.bounds)
         let url = URL(string: "mapbox://styles/xain08/cjx1kdz9u278u1cpivf40mqux")
         let mapView = MGLMapView(frame: view.bounds, styleURL: url)
         mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         mapView.delegate = self
-        
-        mapView.showsUserLocation = true
-        
-        
+//        mapView.styleURL = MGLStyle.streetsStyleURL
         // coordinates for London, UK
         let center = CLLocationCoordinate2D(latitude: 51.509865, longitude: -0.118092)
-        
         // set starting point
         mapView.setCenter(center, zoomLevel: 6, direction: 0, animated: false)
-        
         view.addSubview(mapView)
-        
-        let singleTap = UITapGestureRecognizer(target: self, action: #selector(handleMapTap(sender:)))
-        for recognizer in mapView.gestureRecognizers! where recognizer is UITapGestureRecognizer {
-            singleTap.require(toFail: recognizer)
-        }
-        mapView.addGestureRecognizer(singleTap)
-        
-        let centerScreenPoint:CGPoint = mapView.convert(mapView.centerCoordinate, toPointTo: nil)
         
     }
     
@@ -72,44 +61,8 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         let source = MGLVectorTileSource(identifier: "statistical-gis-boundaries-lo-c0wr80", configurationURL: url)
         style.addSource(source)
         
-        let layer = MGLFillStyleLayer(identifier: layerIdentifier, source: source)
-        
-        // Access the tileset layer.
-        layer.sourceLayerIdentifier = "statistical-gis-boundaries-lo-c0wr80"
-        
-        
     }
     
-
-    @objc @IBAction func handleMapTap(sender: UITapGestureRecognizer) {
-        
-        let tapPoint: CGPoint = sender.location(in: mapView)
-        let tapCoordinate: CLLocationCoordinate2D = mapView.convert(tapPoint, toCoordinateFrom: nil)
-        print("You tapped at: \(tapCoordinate.latitude), \(tapCoordinate.longitude)")
-
-//        let spot = sender.location(in: mapView)
-//        let features = mapView.visibleFeatures(at: spot, styleLayerIdentifiers:
-//            Set([layerIdentifier]))
-//
-//        print("double")
-       
-    }
-    
-    func changeOpacity(name: String) {
-        guard let layer = mapView.style?.layer(withIdentifier: layerIdentifier) as? MGLFillStyleLayer else {
-            fatalError("Could not cast to specified MGLFillStyleLayer")
-        }
-        // Check if a state was selected, then change the opacity of the states that were not selected.
-        if !name.isEmpty {
-            layer.fillOpacity = NSExpression(format: "TERNARY(name = %@, 1, 0)", name)
-        } else {
-            // Reset the opacity for all states if the user did not tap on a state.
-            layer.fillOpacity = NSExpression(forConstantValue: 1)
-        }
-    }
-    
-
- 
     
     func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
         guard annotation is MGLPointAnnotation else {
@@ -120,23 +73,47 @@ class ViewController: UIViewController, MGLMapViewDelegate {
         
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
         
+        
         if annotationView == nil {
             annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
             annotationView!.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
+            annotationView!.bounds = CGRect(x: 0, y: 0, width: 60, height: 60)
+        
             
             let hue = CGFloat(annotation.coordinate.longitude) / 100
-            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 0.5)
+            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
+            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 0.2)
         }
+        
         
         return annotationView
     }
+    
     
 
     
     func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
         return true
+    
+    }
+    
+    func mapView(_ mapView: MGLMapView, rightCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
+        return UIButton(type: .detailDisclosure)
+    }
+    
+    
+    func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
+        // Hide the callout view.
+        mapView.deselectAnnotation(annotation, animated: false)
+        
+        // Show an alert containing the annotation's details
+        
+        let alert = UIAlertController(title: annotation.title!!, message: annotation.subtitle!, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
         
     }
+
     
     
     func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
@@ -158,18 +135,22 @@ class ViewController: UIViewController, MGLMapViewDelegate {
                 CLLocationCoordinate2D(latitude: boroughData[i].lat, longitude: boroughData[i].lon)
             ]
             
+            var info: String = "Ozone: \(boroughData[i].O3) \n Nitrogen Dioxide: \(boroughData[i].NO2) \n Particulate Matter 10: \(boroughData[i].PM10) \n Particulate Matter 2.5: \(boroughData[i].PM25)"
+            
+            
             //        Point annotations
             var pointAnnotations = [MGLPointAnnotation]()
             for coordinate in coordinates {
                 let point = MGLPointAnnotation()
                 point.coordinate = coordinate
                 point.title = boroughData[i].name
-                point.subtitle = "O3: \(boroughData[i].O3)"
+                point.subtitle = info
+            
+              
                 pointAnnotations.append(point)
             }
-            
-            mapView.addAnnotations(pointAnnotations)
-        }
+        mapView.addAnnotations(pointAnnotations)
+      }
     }
     
     
@@ -197,8 +178,9 @@ class ViewController: UIViewController, MGLMapViewDelegate {
     }
     
     
-    
 }
+    
+
 
 
 
