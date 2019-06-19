@@ -61,61 +61,92 @@ class HomeController: UIViewController, MGLMapViewDelegate {
                 print(mapView)
     }
     
-        func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
-            guard annotation is MGLPointAnnotation else {
-                return nil
-            }
-    
-            let reuseIdentifier = "\(annotation.coordinate.longitude)"
-    
-            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
-    
-            if annotationView == nil {
-                annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
-                annotationView!.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
-    
-                let hue = CGFloat(annotation.coordinate.longitude) / 100
-                annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 0.5)
-            }
-    
-            return annotationView
+    func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
+        guard annotation is MGLPointAnnotation else {
+            return nil
         }
-    
-        func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
-            return true
+        
+        let reuseIdentifier = "\(annotation.coordinate.longitude)"
+        
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier)
+        
+        
+        if annotationView == nil {
+            annotationView = CustomAnnotationView(reuseIdentifier: reuseIdentifier)
+            annotationView!.bounds = CGRect(x: 0, y: 0, width: 40, height: 40)
+            annotationView!.bounds = CGRect(x: 0, y: 0, width: 60, height: 60)
+            
+            
+            let hue = CGFloat(annotation.coordinate.longitude) / 100
+            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 1)
+            annotationView!.backgroundColor = UIColor(hue: hue, saturation: 0.5, brightness: 1, alpha: 0.2)
         }
+        
+        
+        return annotationView
+    }
     
-        func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
-            // Wait for the map to load before initiating first camera movement
     
-            // Create a camera that rotates around center point
-            let camera = MGLMapCamera(lookingAtCenter: mapView.centerCoordinate, altitude: 100000,
-                                      pitch: 3, heading: 0)
     
-            // Animate the camera movement over 5 seconds
-            mapView.setCamera(camera, withDuration: 3, animationTimingFunction:
-                CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
+    func mapView(_ mapView: MGLMapView, annotationCanShowCallout annotation: MGLAnnotation) -> Bool {
+        return true
+        
+    }
     
-            for i in 0..<boroughData.count {
+    func mapView(_ mapView: MGLMapView, rightCalloutAccessoryViewFor annotation: MGLAnnotation) -> UIView? {
+        return UIButton(type: .detailDisclosure)
+    }
     
-                // Coordinates
-                let coordinates = [
-                    CLLocationCoordinate2D(latitude: boroughData[i].lat, longitude: boroughData[i].lon)
-                ]
     
-                // Point annotations
-                var pointAnnotations = [MGLPointAnnotation]()
-                for coordinate in coordinates {
-                    let point = MGLPointAnnotation()
-                    point.coordinate = coordinate
-                    point.title = boroughData[i].name
-                    point.subtitle = "PM10: \(boroughData[i].PM10)"
-                    pointAnnotations.append(point)
-                }
+    func mapView(_ mapView: MGLMapView, annotation: MGLAnnotation, calloutAccessoryControlTapped control: UIControl) {
+        // Hide the callout view.
+        mapView.deselectAnnotation(annotation, animated: false)
+        
+        // Show an alert containing the annotation's details
+        
+        let alert = UIAlertController(title: annotation.title!!, message: annotation.subtitle!, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+        
+    }
     
-                mapView.addAnnotations(pointAnnotations)
+    
+    func mapViewDidFinishLoadingMap(_ mapView: MGLMapView) {
+        // Wait for the map to load before initiating first camera movement
+        
+        // Create a camera that rotates around center point
+        
+        let camera = MGLMapCamera(lookingAtCenter: mapView.centerCoordinate, altitude: 100000,
+                                  pitch: 3, heading: 0)
+        
+        // Animate the camera movement over 5 seconds
+        mapView.setCamera(camera, withDuration: 3, animationTimingFunction:
+            CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut))
+        
+        for i in 0..<boroughData.count {
+            
+            //        Coordinates
+            let coordinates = [
+                CLLocationCoordinate2D(latitude: boroughData[i].lat, longitude: boroughData[i].lon)
+            ]
+            
+            let info: String = "Pollution Stats \n Ozone: \(boroughData[i].O3) \n Nitrogen Dioxide: \(boroughData[i].NO2) \n Particulate Matter 10: \(boroughData[i].PM10) \n Particulate Matter 2.5: \(boroughData[i].PM25)"
+            
+            
+            //        Point annotations
+            var pointAnnotations = [MGLPointAnnotation]()
+            for coordinate in coordinates {
+                let point = MGLPointAnnotation()
+                point.coordinate = coordinate
+                point.title = boroughData[i].name
+                point.subtitle = info
+                
+                
+                pointAnnotations.append(point)
             }
+            mapView.addAnnotations(pointAnnotations)
         }
+    }
     
     class CustomAnnotationView: MGLAnnotationView {
         override func layoutSubviews() {
