@@ -42,6 +42,10 @@ To run the tests, navigate to the top left of Xcode (as seen below) and click th
 ## Tech Stack
 
 - Swift
+- Mapbox
+- Xcode (with Simulator)
+- Github
+- Alamofire/SwiftyJSON
 
 ## User Stories
 
