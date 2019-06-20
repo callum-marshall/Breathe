@@ -126,7 +126,16 @@ class HomeController: UIViewController, MGLMapViewDelegate {
                 CLLocationCoordinate2D(latitude: boroughData[i].lat, longitude: boroughData[i].lon)
             ]
             
-            let info: String = "Pollution Stats \n Ozone: \(boroughData[i].O3) \n Nitrogen Dioxide: \(boroughData[i].NO2) \n Particulate Matter 10: \(boroughData[i].PM10) \n Particulate Matter 2.5: \(boroughData[i].PM25)"
+            let O3 = boroughData[i].O3
+            let strO3 = String(format: "%.3f", O3)
+            let NO2 = boroughData[i].NO2
+            let strNO2 = String(format: "%.3f", NO2)
+            let PM10 = boroughData[i].PM10
+            let strPM10 = String(format: "%.3f", PM10)
+            let PM25 = boroughData[i].PM25
+            let strPM25 = String(format: "%.3f", PM25)
+            
+            let info: String = "Pollution Stats (µg/m3) \n Ozone: \(strO3)\n Nitrogen Dioxide: \(strNO2)\n Particulate Matter 2.5: \(strPM25)\n Particulate Matter 10:\(strPM10)"
             
             
             //        Point annotations
@@ -136,7 +145,6 @@ class HomeController: UIViewController, MGLMapViewDelegate {
                 point.coordinate = coordinate
                 point.title = boroughData[i].name
                 point.subtitle = info
-                
                 
                 pointAnnotations.append(point)
             }
