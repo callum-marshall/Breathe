@@ -28,7 +28,7 @@ Once the installation is finished, open the project in Xcode (please install it 
 ```
 open Breathe.xcworkspace
 ```
-OR
+**OR**
 ```
 xed .
 ```
@@ -38,10 +38,16 @@ To run the tests, navigate to the top left of Xcode (as seen below) and click th
 
 ![alt text](https://github.com/callum-marshall/Breathe/blob/master/Test_Instruction.png)
 
+![alt text](https://github.com/callum-marshall/Breathe/blob/master/Example_1.png) ![alt text](https://github.com/callum-marshall/Breathe/blob/master/Example_2.png) ![alt text](https://github.com/callum-marshall/Breathe/blob/master/Example_3.png)
+
 
 ## Tech Stack
 
 - Swift
+- Mapbox
+- Xcode (with Simulator)
+- Github
+- Alamofire/SwiftyJSON
 
 ## User Stories
 
@@ -69,3 +75,16 @@ I would like to be able to see where I am on the map.
 
 ## Our vision going forward
 
+- More cities and general data for countries
+
+- Replacing annotations with tiles
+
+- Getting pollution data on user's exact location
+
+- Navigation system for avoiding high-pollution areas
+
+- Colour coding the data - using indexes for individual pollutants
+
+- Providing resources in app for user to learn more about pollution and how they can get involved in climate action
+
+- Showing other social data relative to pollution (e.g. how social segregation worsens climate change)
