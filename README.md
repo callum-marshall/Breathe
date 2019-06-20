@@ -28,7 +28,7 @@ Once the installation is finished, open the project in Xcode (please install it 
 ```
 open Breathe.xcworkspace
 ```
-OR
+**OR**
 ```
 xed .
 ```
@@ -69,3 +69,16 @@ I would like to be able to see where I am on the map.
 
 ## Our vision going forward
 
+- More cities and general data for countries
+
+- Replacing annotations with tiles
+
+- Getting pollution data on user's exact location
+
+- Navigation system for avoiding high-pollution areas
+
+- Colour coding the data - using indexes for individual pollutants
+
+- Providing resources in app for user to learn more about pollution and how they can get involved in climate action
+
+- Showing other social data relative to pollution (e.g. how social segregation worsens climate change)
