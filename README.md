@@ -38,6 +38,8 @@ To run the tests, navigate to the top left of Xcode (as seen below) and click th
 
 ![alt text](https://github.com/callum-marshall/Breathe/blob/master/Test_Instruction.png)
 
+![alt text](https://github.com/callum-marshall/Breathe/blob/master/Example_1.png) ![alt text](https://github.com/callum-marshall/Breathe/blob/master/Example_2.png) ![alt text](https://github.com/callum-marshall/Breathe/blob/master/Example_3.png)
+
 
 ## Tech Stack
 
