@@ -50,6 +50,7 @@ class HomeController: UIViewController, MGLMapViewDelegate {
                 let mapView = MGLMapView(frame: view.bounds, styleURL: url)
                 mapView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                 mapView.delegate = self
+                mapView.showsUserLocation = true
         
                 // coordinates for London, UK
                 let center = CLLocationCoordinate2D(latitude: 51.509865, longitude: -0.118092)
@@ -135,7 +136,7 @@ class HomeController: UIViewController, MGLMapViewDelegate {
             let PM25 = boroughData[i].PM25
             let strPM25 = String(format: "%.3f", PM25)
             
-            let info: String = "Pollution Stats (µg/m3) \n Ozone: \(strO3)\n Nitrogen Dioxide: \(strNO2)\n Particulate Matter 2.5: \(strPM25)\n Particulate Matter 10:\(strPM10)"
+            let info: String = "Pollution Stats (µg/m3) \n Ozone: \(strO3)\n Nitrogen Dioxide: \(strNO2)\n Particulate Matter 2.5: \(strPM25)\n Particulate Matter 10: \(strPM10)"
             
             
             //        Point annotations
